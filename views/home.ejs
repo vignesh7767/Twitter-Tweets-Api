@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<link href="http://fonts.cdnfonts.com/css/phosphorus-selenide" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<html>
+<style>
+    body {
+        text-align: center;
+    }
+
+    input {
+        padding: 13px;
+        width: 75%;
+    }
+
+    button {
+        border: 0px solid white;
+        border-radius: 3px;
+        cursor: pointer;
+        padding: 10px;
+        background-color: seagreen;
+        box-shadow: 1px 2px 3px gray;
+    }
+
+    button:hover {
+        border-radius: 5px;
+        background-color: teal;
+        font-size: 90%;
+        box-shadow: 2px 3px 4px gray;
+    }
+
+    h1 {
+        font-family: 'Phosphorus Selenide', sans-serif;
+        font-size: 40px;
+        color: darkblue;
+        text-shadow: 6px 7px 8px lightpink;
+    }
+
+    h4 {
+        font-size: 20px;
+    }
+
+    .search {
+        background-color: darkgrey;
+        box-shadow: 1px 2px 3px gray;
+        margin: 10px;
+    }
+
+    .search:hover {
+        box-shadow: 2px 3px 4px gray;
+        background-color: salmon;
+    }
+
+    .starred {
+        position: absolute;
+        top: 20px;
+        right: 100px;
+        background-color: tomato;
+        box-shadow: 1px 2px 3px gray;
+    }
+
+    .starred:hover {
+        background-color: mediumslateblue;
+    }
+
+    .popular {
+        margin-left: 15%;
+        width: 70%;
+    }
+
+    .plus {
+        margin-top: 20px;
+        color: white;
+        background-color: lightgreen;
+    }
+
+    .remove {
+        color: white;
+        background-color: maroon;
+    }
+    h2 {
+        color: lightslategray;
+    }
+    #demo {
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+    #twitter {
+        text-shadow: 0px 0px 0px skyblue;
+    }
+</style>
+
+<body>
+    <button class="starred" onclick="getstarred()">My Favourites</button>
+    <h1>Demo Twitter API <i id="twitter" class="fa fa-twitter" style="font-size:45px;color:darkblue"></i></h1>
+    <h2 id="demo"></h2>
+    <input type="text" id="search"><br><br>
+    <button class="btn" type="submit" onclick="fun()">SEARCH</button>
+    <div class="popular">
+        <% if(keywords.length>0) { %>
+            <h4>Popular Searches</h4>
+            <% for(let kwd of keywords.reverse()) { %>
+                <button class="search" id=<%=kwd.keyword%> onclick="search(id)"><%=kwd.keyword%></button>
+            <% } %>
+        <% } %>
+        <br>
+        <button class="plus" onclick="addKeyword()"><b>Add Keyword</b></button>
+        <button class="remove" onclick="clearKeywords()"><b>Clear Keywords</b></button>
+    </div>
+</body>
+<script>
+    var i = 0;
+    var txt = 'Enter keywords to search in Twitter ..!'; /* The text */
+    var speed = 100; /* The speed/duration of the effect in milliseconds */
+    typeWriter();
+
+    function typeWriter() {
+        if (i < txt.length) {
+            document.getElementById("demo").innerHTML += txt.charAt(i);
+            i++;
+            setTimeout(typeWriter, speed);
+        }
+    }
+    function fun() {
+        let kwd = document.getElementById('search').value;
+        window.location.href = "http://localhost:5000/tweets/" + kwd;
+    }
+    function search(id) {
+        window.location.href = "http://localhost:5000/tweets/" + id;
+    }
+    function getstarred() {
+        window.location.href = "http://localhost:5000/tweets/favourites/";
+    }
+    function addKeyword() {
+        window.location.href = "http://localhost:5000/home/addKeyword/";
+    }
+    function clearKeywords() {
+        window.location.href = 'http://localhost:5000/home/keywords/clear/';
+    }
+</script>
+
+</html>

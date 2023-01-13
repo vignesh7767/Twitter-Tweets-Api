@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <link href="http://fonts.cdnfonts.com/css/imperatorbronzesmallcaps" rel="stylesheet">
+    <link href="http://fonts.cdnfonts.com/css/sengoa" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                
+    <style>
+        a {
+            text-decoration: none;
+            background-color: palevioletred;
+            padding: 10px;
+            border-radius: 5px;
+            color: maroon;
+            box-shadow: 1px 2px 3px gray;
+        }
+        a:hover {
+            font-size: 105%;
+            box-shadow: 2px 3px 4px gray;
+            background-color: pink;
+        }
+        .back {
+            position: absolute;
+            top: 55px;
+            left: 900px;
+        }
+        .home {
+            position: absolute;
+            top: 55px;
+            left: 350px;
+        }
+        .container {
+            margin-left: 12%;
+            width: 70%;
+            border-radius: 30px 0px;
+            padding: 30px;
+            background-color: lightskyblue;
+        }
+        h1 {
+            color: purple;
+            font-family: 'ImperatorBronzeSmallCaps', sans-serif;
+            text-align: center;
+        }
+        p {
+            font-family: 'Sengoa', sans-serif;
+        }
+        #box {
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid seagreen;
+        }
+    </style>
+    <body>
+        <div class="container">
+            <h1>Tweet Details <i id="twitter" class="fa fa-twitter" style="font-size:45px;color:darkmagenta"></i></h1>
+            <a class="back" href="/tweets/<%=tweet.keyword%>"">
+                Go Back
+            </a>
+            <a class="home" href="/home">Home</a>
+            <p>
+                <b>Tweet Keyword</b><br>
+                <p id="box"><%=tweet.keyword%></p>
+            </p>
+            <p>
+                <b>Tweet ID</b><br>
+                <p id="box"><%=tweet.id%></p>
+            </p>
+            <p>
+                <b>Tweeted By</b><br>
+                <p id="box"><%=tweet.author %></p>
+            </p>
+            <p>
+                <b>Category</b><br>
+                <p id="box"><%=tweet.category%></p>
+            </p>
+            <p>
+                <b>Content</b><br>
+                <p id="box" class="content"><%=tweet.content%></p>
+            </p>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+    <link href="http://fonts.cdnfonts.com/css/dreamcast" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    h1 {
+        color: slateblue;
+        text-shadow: 0px 1px 2px skyblue;
+        font-size: 35px;
+        font-family: 'Dreamcast', sans-serif;
+        text-align: center;
+    }
+
+    .container {
+        width: 65%;
+        margin: 10px;
+        margin-left: 16%;
+        background-color: lightblue;
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: 1px 2px 3px gray;
+    }
+    .delete {
+        cursor: pointer;
+        margin-left: 85%;
+        text-decoration: none;
+        background: linear-gradient(88deg, black, maroon);
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 1px 2px 3px gray;
+    }
+
+    .delete:hover {
+        box-shadow: 2px 3px 4px gray;
+        background: linear-gradient(77deg, rgba(135, 124, 207, 0.667), rgb(38, 136, 113));
+        font-size: 105%;
+        border-radius: 9px;
+    }
+
+    button {
+        padding: 10px;
+        margin: 10px;
+        background-color: salmon;
+        border: 0px solid black;
+        cursor: pointer;
+        box-shadow: 1px 2px 3px gray;
+    }
+
+    button:hover {
+        box-shadow: 2px 3px 4px gray;
+        font-size: 90%;
+        background-color: peru;
+    }
+    .home {
+        position: absolute;
+        top: 15px;
+        border-radius: 5px;
+        right: 820px;
+        box-shadow: 1px 2px 3px gray;
+    }
+    .clear {
+        position: absolute;
+        cursor: pointer;
+        top: 15px;
+        border-radius: 5px;
+        left: 815px;
+        box-shadow: 1px 2px 3px gray;
+        background: linear-gradient(60deg, purple, violet);
+    }
+    .clear:hover {
+        box-shadow: 2px 3px 4px gray;
+        font-size: 90%;
+        background: linear-gradient(45deg, black, skyblue);
+    }
+    input {
+        position: absolute;
+        margin: 4px;
+        left: 110px;
+        padding: 10px;
+        border-radius: 10px;
+        border: 0px solid gray;
+        box-shadow: 0px 1px 2px gray;
+    }
+    .search {
+        background-color: darkgray;
+        position: absolute;
+        top: 13px;
+        left: 30px;
+        border-radius: 5px;
+        box-shadow: 1px 2px 3px gray;
+    }
+    .search:hover {
+        font-size: 90%;
+        box-shadow: 1.5px 2.5px 3.5px gray;
+        background-color: slategrey;
+    } 
+    #home {
+        position: absolute;
+        top: 230px;
+        left: 550px;
+        border-radius: 8px;
+    }
+</style>
+
+<body>
+    <% if(favourites.length==0) { %>
+        <br><br><br><br><br><br><br>
+        <h1>No Tweet starred Yet ...</h1>
+        <button onclick="fun()" id="home">Back To HomePage</button>
+    <% } else { %>
+    <p>
+        <input type="text" name="" id="search" placeholder="Enter keyword" required>
+        <button class="search" onclick="fun3()">Search</button>
+        <button onclick="fun()" class="home">HomePage</button>
+        <h1>My Favourite Tweets <i id="twitter" class="fa fa-twitter" style="font-size:35px;color:slateblue"></i></h1>
+        <button onclick="fun2()" class="clear">CLEAR </button>
+    </p>
+    <% for(let tweet of favourites) { %>
+        <div class="container">
+            <p>
+                <a href="/tweets/favourites/delete/<%=tweet.id%>" class="delete"
+                    onclick="deleteTweet(tweet.id)"
+                    >DELETE</a>
+            </p>
+            <p><b>Tweeted By</b>:
+                <%=tweet.author%>
+            </p>
+            <p>
+                <b>Starred Keyword</b>:
+                <%=tweet.keyword%>
+            </p>
+            <p><b>id</b>:
+                <%=tweet.id%>
+            </p>
+            <p>
+                <b>Category</b>:
+                <%=tweet.category%>
+            </p>
+            <p>
+                <b>Content</b>:
+                <%=tweet.content%>
+            </p>
+            <br>
+        </div>
+        <% } %>
+    <% } %>
+</body>
+<script>
+    function fun() {
+        window.location.href = "/home";
+    }
+    function fun2() {
+        window.location.href = "/tweets/favourites/deleteAll";
+    }
+    function fun3() {
+        let keyword = document.getElementById('search').value;
+        window.location.href = "/tweets/favourites/search/"+keyword;
+    }
+    function deleteTweet(id) {
+        window.location.href = "/tweets/favourites/delete/"+id;
+    }
+    
+</script>
+
+</html>

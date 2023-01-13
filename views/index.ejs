@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Twitter API</title>
+        <link href="http://fonts.cdnfonts.com/css/dreamcast" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                
+        <style>
+            body {
+                background-color: springgreen;
+            }
+            h1 {
+                text-shadow: 4px 4px 8px #fafafa;
+                text-align: center;
+                font-size: 50px;
+                font-family: 'Dreamcast', sans-serif;
+            }
+            .container1 {
+                background-color: white;
+                box-shadow: 12px 12px 12px gray;
+                border-radius: 10px;
+                padding: 10px;
+                margin: 15px;
+                margin-left: 19%;
+                width: 60%;
+            }
+            .container2 {
+                background-color: ivory;
+                box-shadow: 12px 12px 12px grey;
+                border-radius: 10px;
+                padding: 10px;
+                margin: 15px;
+                margin-left: 19%;
+                width: 60%;
+            }
+            h2 {
+                font-size: 30px;
+                text-align: center;
+            }
+            h4 {
+                font-family: monospace;
+                color: #fafafa;
+                padding: 10px;
+                margin-left: 24%;
+                border-radius: 10px;
+                background-color: crimson;
+                width: 50%;
+                font-size: 18px;
+                text-align: center;
+            }
+            button {
+                border: 0px solid greenyellow;
+                border-radius: 5px;
+                cursor: pointer;
+                background-color: darksalmon;
+                padding: 10px;
+            }
+            button:hover {
+                font-size: 90%;
+                background-color: plum;
+            }
+            .home {
+                position: absolute;
+                top: 45px;
+                left: 250px;
+                box-shadow: 1px 2px 3px gray;
+            }
+            .home:hover {
+                background-color: royalblue;
+                box-shadow: 2px 3px 4px gray;
+            }
+            .star {
+                cursor: pointer;
+                margin-left: 91%;
+                text-decoration: none;
+                background-color: fuchsia;
+                color: white;
+                padding: 10px;
+                border-radius: 0px 5px;
+                box-shadow: 1px 2px 3px gray;
+            }
+            .star:hover {
+                font-size: 105%;
+                box-shadow: 2px 3px 4px gray;
+                background-color: brown;
+            }
+            .details {
+                text-decoration: none;
+                background-color: darkcyan;
+                padding: 10px;
+                margin-left: 80%;
+                color: white;
+                border-radius: 0px 5px;
+                box-shadow: 1px 2px 3px gray;
+            }
+            .details:hover {
+                box-shadow: 2px 3px 4px gray;
+                font-size: 105%;
+                background-color: green;
+            }
+            p {
+                margin-left: 15px;
+            }
+            .favourites {
+                background-color: pink;
+                padding: 12px;
+                position: absolute;
+                top: 45px;
+                right: 100px;
+                box-shadow: 1px 2px 3px gray;
+            }
+            .favourites:hover {
+                font-size: 90%;
+                background-color: tan;
+                box-shadow: 2px 3px 4px gray;
+            }
+            #twitter {
+                text-shadow: 0px 0px 0px wheat;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Demo Twitter API <i id="twitter" class="fa fa-twitter" style="font-size:50px;color:green"></i></h1>
+        </header>
+        <button class="favourites" onclick="favourites()">My Favourites</button>
+        <h4>Search Results on <%=kwd%> <%=tweetCnt %> Tweets and <%=mentionCnt%> Retweets</h4>
+        <button onclick="fun()" class="home">HomePage</button>
+        <% if(tweetCnt>0) {%>
+        <h2>Tweets</h2>
+        <% } %>
+        <% for(let tweet of allTweets) { %>
+            <% if(tweet.category == "Tweet") { %>
+                <div class="container1">
+                    <p>
+                    <a href="/tweets/details/<%=tweet.id%>" class="details">DETAILS</a>
+                    <a href="/tweets/starredSuccessfully/<%=kwd%>/<%=tweet.id%>" class="star">STAR</a>
+                    </p>
+                    <p>
+                        <b>Keyword :</b>
+                        <%=kwd%>
+                    </p>
+                    <p><b>Tweeted By</b>:
+                    <%=tweet.author%></p>
+                    <p><b>id</b>
+                    <%=tweet.id%></p>
+                    <p>
+                        <b>Category</b>
+                        <%=tweet.category%>
+                    </p>
+                </div>
+            <% } %>                
+        <% } %>
+
+        <% if(mentionCnt>0) {%>
+            <h2>Retweets</h2>
+        <% } %>
+        <% for(let tweet of allTweets) { %>
+            <% if(tweet.category != "Tweet") { %>
+                <div class="container2">
+                    <p>
+                        <a href="/tweets/details/<%=tweet.id%>" class="details">DETAILS</a>
+                        <a href="/tweets/starredSuccessfully/<%=kwd%>/<%=tweet.id%>" class="star">STAR</a>
+                        </p>
+                        <p>
+                            <b>Keyword :</b>
+                            <%=kwd%>
+                        </p>
+                        <p><b>Tweeted By</b>:
+                        <%=tweet.author%></p>
+                        <p><b>id</b>
+                        <%=tweet.id%></p>
+                        <p>
+                            <b>Category</b>
+                            <%=tweet.category%>
+                        </p>
+                        <p>
+
+                        </p>
+                </div>
+            <% } %>                
+        <% } %>
+    </body>
+</html>
+<script>
+    function fun() {
+        window.location.href = "http://localhost:5000/home";
+    }
+    function favourites() {
+        window.location.href = "http://localhost:5000/tweets/favourites/";
+    }
+</script>

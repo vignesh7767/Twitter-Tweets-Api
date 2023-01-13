@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <link href="http://fonts.cdnfonts.com/css/dreamcast" rel="stylesheet">
+<style>
+    h1 {
+        font-family: 'Dreamcast', sans-serif;
+        text-align: center;
+    }
+
+    .container {
+        width: 65%;
+        margin: 10px;
+        margin-left: 16%;
+        background-color: darkkhaki;
+        border-radius: 10px;
+        padding: 10px;
+    }
+    .container:hover{
+        border-radius: 0px 20px;
+        font-size: 101%;
+        box-shadow: 1px 2px 3px gray;
+    }
+    button {
+        position: absolute;
+        top: 30px;
+        right: 100px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 0px solid rebeccapurple;
+        background-color: tomato;
+        cursor: pointer;
+        box-shadow: 1px 2px 3px gray;
+    }
+    button:hover {
+        background-color: burlywood;
+    }
+</style>
+
+<body>
+    <% if(favourites.length==0) { %>
+        <h1>No Results Found</h1>
+    <% } else { %>
+    <p>
+        <button onclick="fun()">GO BACK</button>
+        <h1>Search Results in Favourites for <%=keyword%></h1>
+    </p>
+    <% for(let tweet of favourites) { %>
+        <div class="container">
+            <p><b>Tweeted By</b>:
+                <%=tweet.author%>
+            </p>
+            <p>
+                <b>Starred Keyword</b>:
+                <%=tweet.keyword%>
+            </p>
+            <p><b>id</b>:
+                <%=tweet.id%>
+            </p>
+            <p>
+                <b>Category</b>:
+                <%=tweet.category%>
+            </p>
+            <p>
+                <b>Content</b>:
+                <%=tweet.content%>
+            </p>
+            <br>
+        </div>
+        <% } %>
+    <% } %>
+</body>
+<script>
+    function fun() {
+        window.location.href = "/tweets/favourites/";
+    }
+</script>
+</html>
